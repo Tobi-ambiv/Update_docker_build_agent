@@ -1,0 +1,12 @@
+--Pull my images from docker hub
+
+--create and run my container
+
+$docker run -d --name azure-container -e AZP_URL=https://dev.azure.com/TobiOderinde1/ -e AGENT_TOKEN=my_token -e AZP_POOL=dockerpool tobi7636/azure-agent
+
+
+docker cp start.sh azure-agent-container:/agent/start.sh
+docker cp configure-agent.sh azure-agent-container:/agent/configure-agent.sh
+$docker exec -it azure-agent-container /bin/bash -c "chmod +x /agent/start.sh /agent/configure-agent.sh && /agent/start.sh"
+
+$docker logs containerid
